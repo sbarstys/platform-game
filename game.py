@@ -30,6 +30,8 @@ class Game:
     LOSE_TEXT_X = 155
     LOSE_TEXT_Y = 10
 
+    #Makes the Enemy and shelf lists as well as the character
+    #Based on the input file provided.
     def make_game_lists(self, text_file):
         game_list = []
         file_input = []
@@ -58,6 +60,8 @@ class Game:
         
         return game_list
 
+    #Processes the lists to extract the first line for the character and ground
+    #From the game lists
     def make_sub_lists(self, input_list):
         counter = 0
         return_list = []
@@ -92,7 +96,7 @@ class Game:
         for enemy in self.enemy_list:
             self.sprite_group.add(enemy)
 
-
+    #Determines if the x position of the player sprite is within the horizontal range of a platform/shelf
     def shelf_horiz_range(self, *args):
         if len(args) == 0:
             in_left = self.player.rect.x >= self.player.prev_x_y_range[0] and self.player.rect.x <= self.player.prev_x_y_range[1]
@@ -113,7 +117,7 @@ class Game:
     def hit_ceiling(self):
         return self.player.rect.y < 0
     
-
+    #Determines if the player sprite is in contact with a platform or the ground
     def check_contact(self):
         if self.player.rect.y >= self.ground.col_thresh and self.player.current_vel < 0:
             self.player.rect.y = self.player.vert_spawn
@@ -145,7 +149,8 @@ class Game:
         self.player.rect.y -= self.player.current_vel
         self.player.current_vel -= Game.GRAVITY 
 
-    #If t
+    #Determine if the player is currently on a platform. If not apply 
+    #gravity so they can fall.
     def handle_pos(self):
         if not self.check_contact():
             self.apply_gravity()
@@ -153,13 +158,20 @@ class Game:
             self.current_vel = 0
             self.up_counter = 0
 
-    
+    #Moves player to the left on screen by the horizontal velocity
     def move_left(self):
         self.player.rect.x -= Game.RL_VEL
     
+    #Moves player to the right on screen by the horizontal velocity
     def move_right(self):
         self.player.rect.x += Game.RL_VEL
 
+    #Increments the number of times the user presses the up arrow key.
+    #Holding the up arrow key will register multiple times. The number
+    #of times that the key is registered is counted in order to give the
+    #player more control over the jump height.
+    #Sets the current velocity and to the initial jump velocity and then
+    #moves the character
     def jump(self):
         self.up_counter += 1
         self.player.current_vel = Game.INITIAL_VELOCITY
@@ -193,7 +205,7 @@ class Game:
         if key_pressed[pygame.K_UP] and self.up_counter < Game.KEY_UP_THRESH:
             self.jump()
 
-
+    #Determines if the player sprite collides with any enemies in the enemy list
     def check_enemy_collision(self):
         for enemy in self.enemy_list:
             if self.player.rect.colliderect(enemy.rect):
