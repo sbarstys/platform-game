@@ -1,0 +1,5 @@
+0 590 800 110 524 ground.png
+300 450 200 50 400 platform.png
+0 340 170 70 290 platform.png
+600 160 200 50 110 platform.png
+300 250 200 50 200 platform.png

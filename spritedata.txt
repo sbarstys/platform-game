@@ -1,0 +1,6 @@
+50 540 50 50 player.png
+730 110 50 50 coin.png
+300 400 50 50 2 0 300 450 400 400 newest-enemy-1.png
+450 200 50 50 2 0 300 450 200 200 newest-enemy-1.png
+210 475 50 50 0 3 210 210 150 475 newest-enemy-2.png
+530 100 50 50 0 4 530 530 80 475 newest-enemy-2.png
