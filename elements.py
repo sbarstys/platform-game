@@ -81,7 +81,6 @@ class Character(pygame.sprite.Sprite):
 #Class used for storing the Enemy data. Data that is extracted from the files is inputted
 #as a list with each location holding a different datapoint.
 class Enemy(pygame.sprite.Sprite):
-    #x y width height horiz_velocity, vert_velocity left_most right_most up_most down_most image
     def __init__(self, input_list):
         super().__init__()
         width, height = float(input_list[WIDTH_INDEX]), float(input_list[HEIGHT_INDEX])
